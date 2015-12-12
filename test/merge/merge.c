@@ -9,9 +9,16 @@ void printArr(int *arr){
 	printf("\n");
 }
 
+void printSizeArr(int *arr, int len){
+	for(int i = 0; i < len; i++){
+		printf("%4d", arr[i]);
+	}
+	printf("\n");
+}
+
 void merge(int *arr, int start, int end){
 	printf("start = %d end = %d\n", start, end);
-	int mid = (start + mid)/2;
+	int mid = (start + end)/2;
 	int buflen = (end - start + 1);
 	int *buf = (int*)malloc(sizeof(int) * buflen);
 
@@ -29,6 +36,9 @@ void merge(int *arr, int start, int end){
 		}
 	}
 
+	printf("bufer\n");
+	printSizeArr(buf, buflen);
+
 	int startPoint = start;
 
 	for(int i = 0; i < buflen; i++){
@@ -40,13 +50,15 @@ void merge(int *arr, int start, int end){
 
 void mergesort(int *arr, int start, int end){
 	
-	if(start == end) return;
+	if(start >= end) return;
+	printf("mergesort start = %d end = %d\n\n", start, end);
 	
 
 	printf("\t");
 	printArr(arr);
 	int mid = (start + end)/2;
 	mergesort(arr, start, mid);
+	printf("mid = %d\n", mid);
 	mergesort(arr, mid+1, end);
 	merge(arr, start, end);
 }
